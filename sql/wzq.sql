@@ -1,4 +1,3 @@
-
 -- MySQL Workbench Forward Engineering
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
@@ -42,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `wzq`.`gobang` (
   `user_a` INT UNSIGNED NOT NULL COMMENT '玩家 A 的 ID',
   `user_b` INT UNSIGNED NOT NULL COMMENT '用户 B 的 ID',
   `status` TINYINT(2) UNSIGNED NOT NULL DEFAULT 0 COMMENT '棋局状态，0等待匹配，1进行中，2已完成',
-  `type` TINYINT(2) NOT NULL COMMENT '棋局类型：0随机匹配用户，1邀请码加入',
+  `type` TINYINT(2) NOT NULL DEFAULT 0 COMMENT '棋局类型：0随机匹配用户，1邀请码加入',
   `code` CHAR(5) NOT NULL DEFAULT '' COMMENT '邀请码：当 type 为 1 时有用',
   `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `begin_time` TIMESTAMP NULL COMMENT '棋局开始时间：由触发器根据 status 的状态 为 1 时写入',
@@ -94,13 +93,19 @@ USE `wzq`;
 
 DELIMITER $$
 USE `wzq`$$
-CREATE  TRIGGER `gobang_AFTER_UPDATE` AFTER UPDATE ON `gobang` FOR EACH ROW
+CREATE TRIGGER `wzq`.`user_BEFORE_UPDATE` BEFORE UPDATE ON `user` FOR EACH ROW
 BEGIN
-	IF old.status = 1 THEN
-		UPDATE `gobang` SET begin_time = current_timestamp() where id = old.id;
+	set new.update_time = current_timestamp();
+END$$
+
+USE `wzq`$$
+CREATE TRIGGER `wzq`.`gobang_BEFORE_UPDATE` BEFORE UPDATE ON `gobang` FOR EACH ROW
+BEGIN
+	IF new.status = 1 THEN
+		SET new.begin_time = current_timestamp();
 	END IF;
-	IF old.status = 2 THEN
-		UPDATE `gobang` SET finish_time = current_timestamp() where id = old.id;
+	IF new.status = 2 THEN
+		SET new.finish_time = current_timestamp();
 	END IF;
 END$$
 
