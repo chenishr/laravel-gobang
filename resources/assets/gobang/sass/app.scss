@@ -1,0 +1,19 @@
+
+// Fonts
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+#app{
+	position: absolute;
+	width:751px;                                                                                          
+	height:1335px;                                                                                        
+	top:0;                                                                                                
+	left:0;               
+	-webkit-transform-origin: 50% 0%;                                                                     
+	-transform-origin: 50% 0%;
+}

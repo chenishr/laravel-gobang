@@ -15,6 +15,9 @@ Route::get('/', function () {
     return view('wzq');
 });
 
+Route::get('gobang', 'GobangController@index');
+/*
 Route::get('/wzq', function () {
     return view('welcome');
 });
+ */
