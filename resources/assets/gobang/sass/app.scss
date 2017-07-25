@@ -8,12 +8,97 @@
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
+// 棋盘的格子数目
+$chessboardWidth: 9;
+$chessboardHeight: 9;
+
+body{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background: #efcc69;
+}
 #app{
 	position: absolute;
-	width:751px;                                                                                          
-	height:1335px;                                                                                        
-	top:0;                                                                                                
-	left:0;               
-	-webkit-transform-origin: 50% 0%;                                                                     
+	width:751px; 
+	height:1335px; 
+	top:0;
+	left:0; 
+	-webkit-transform-origin: 50% 0%; 
 	-transform-origin: 50% 0%;
+}
+.chessboard{
+	position: absolute;
+	left:0;
+	top:0;
+	width: 100%;
+	height: 95%;
+}
+
+$chessWidth	: 90%;
+$chessMarginWidth	: 5%;
+.chessboard-bg{
+	position: absolute;
+	left:0;
+	bottom:0;
+	width: $chessWidth;
+	padding-bottom: $chessWidth;
+	height: 0;
+	margin-left: $chessMarginWidth;
+	margin-bottom: $chessMarginWidth;
+}
+.chess-bg{
+	position: absolute;
+	left:0;
+	bottom:0;
+	width: 100%;
+	padding-bottom: 100%;
+	height: 0;
+}
+.chessboard-bg .cell{
+	position: absolute;
+	width: 11%;
+	height: 0;
+	padding-bottom: 11%;
+	background: #999;
+	border-bottom: 1px solid #222;
+	border-right: 1px solid #222;
+}
+.chess-bg .chess{
+	position: absolute;
+	width: 10%;
+	height: 0;
+	padding-bottom: 10%;
+	border-radius: 50%;
+}
+.chess-bg .chess-1{
+	background: #000;
+}
+.chess-bg .chess-2{
+	background: #FFF;
+}
+@for $i from 0 through $chessboardWidth { 
+	.chessboard-bg .cell-row-#{$i}{ 
+		top: 11% * $i;
+	}
+	.chess-bg .chess-row-#{$i}{
+		top: 9.9% * $i;
+	}
+}
+.chess-bg .chess-row-#{$chessboardHeight}{
+	top: 9.9% * $chessboardHeight;
+}
+@for $i from 0 through $chessboardHeight{ 
+	.chessboard-bg .cell-col-#{$i}{ 
+		left: 11% * $i;
+	}
+	.chess-bg .chess-col-#{$i}{
+		left: 9.9% * $i;
+	}
+}
+.chess-bg .chess-col-#{$chessboardHeight}{
+	left: 9.9% * $chessboardHeight;
+}
+.chess-bg .not-show{
+	background: rgba(0, 0, 0, 0);
 }
