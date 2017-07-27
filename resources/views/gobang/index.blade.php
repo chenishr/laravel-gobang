@@ -15,15 +15,14 @@
 	<body>
 		<div id="app">
 			<div v-for="(st,i) in stat" >
-				<span v-for="(s,j) in st">@{{ stat[i][i] }} </span>
+				<span v-for="(s,j) in st">@{{ stat[i][j] }} </span>
 			</div>
 			<div class="chessboard">
 				<div class="chessboard-bg">
 					<div v-for="cell in chessboard" class="cell" v-bind:class="['cell-row-' + cell[0],'cell-col-' + cell[1]]"> </div>
 				</div>
 				<div class="chess-bg">
-					<!--div v-for="cell in chess" class="chess" v-bind:class="['chess-row-' + cell[0],'chess-col-' + cell[1],'chess-' + stat[cell[0]][cell[1]]]" v-on:click="one_step(cell[0],cell[1])"> </div-->
-					<div v-for="(cell,i) in chess" class="chess" v-bind:class="['chess-row-' + chess[i][0],'chess-col-' + chess[i][1],'chess-' + chess[i][2]]" v-on:click="one_step(cell[0],cell[1])"> </div>
+					<div v-for="(cell,i) in chess" class="chess" v-bind:class="['chess-row-' + cell[0],'chess-col-' + cell[1],'chess-' + stat[cell[0]][cell[1]]]" v-on:click="one_step(cell[0],cell[1])"> </div>
 				</div>
 			</div>		
 		</div>

@@ -115,8 +115,19 @@ const app = new Vue({
 		},
 
 		one_step: function(row,col){
-			this.stat[row][col]	= this.user;
+			if(0 != this.stat[row][col]){
+				alert('非法落子');
+				return false;
+			}
+
+			Vue.set(this.stat[row],col, this.user);
 			console.dir(this.stat);
+
+			// 测试 ，切换用户
+			if(1 == this.user)
+				this.user	= 2;
+			else
+				this.user	= 1;
 		}
 	}
 
