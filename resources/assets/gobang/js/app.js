@@ -134,6 +134,3 @@ const app = new Vue({
 });
 
 app.init();
-console.dir(app.chessboard);
-console.dir(Vue);
-console.dir(app);
